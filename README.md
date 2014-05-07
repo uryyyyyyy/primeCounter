@@ -13,3 +13,9 @@ primeCounter
 - 数字でない時
 
 - 数字がマイナスの時
+
+### jarも込めてます。
+
+以下のコマンドで実行できます。
+java -cp primeCounter.jar com.example.main.Main 100000000
+
