@@ -2,6 +2,6 @@ package com.example.prime;
 
 public interface PrimeCounter {
 	
-	public int countPrimeNumber(Integer maxRange);
+	public int countPrimeNumber(int maxRange);
 
 }

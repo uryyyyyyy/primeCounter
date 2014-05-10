@@ -1,7 +1,7 @@
 package com.example.main;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 import com.example.io.NumberWriter;
 import com.example.prime.PrimeCounter;
@@ -11,52 +11,51 @@ import com.example.util.NumberFormatChecker;
 public class Main {
 
 	public static void main(String[] args) {
-		try{
-			final long startTime = System.currentTimeMillis();
-			List<Integer> inputs = load(args);
-			List<Integer> outputs = execute(inputs);
-			write(outputs);
-
-			final long endTime = System.currentTimeMillis();
-			System.out.println(endTime - startTime + "ms かかりました。");
-		}catch(Exception e){
-			e.printStackTrace();
-			System.out.println("エラーです。ログを確認してください。");
-		}
-	}
-
-	private static void write(List<Integer> intList) {
-		System.out.println("出力値");
-		NumberWriter output = new NumberWriter(){
-
-			@Override
-			public void writeAll(List<Integer> list) {
-				for (Integer i : list) {
-					System.out.println(i);
+		BufferedReader stdReader = new BufferedReader(new InputStreamReader(System.in));
+		try {
+			while (true) {
+				String input = stdReader.readLine();
+				if(input == null || input.equals("")){
+					break;// terminate application
 				}
+				execute(input);
 			}
-		};
-		output.writeAll(intList);
+		} catch (Exception e) {
+			System.out.println("何かエラーがおきました。ログを確認してください");
+			e.printStackTrace();
+		}
 	}
 
-	private static List<Integer> execute(final List<Integer> inputs) {
-		final List<Integer> resultList = new ArrayList<Integer>(inputs.size());
-		for (Integer num : inputs) {
-			PrimeCounter logic = new PrimeCounterImpl();
-			int result = logic.countPrimeNumber(num);
-			resultList.add(result);
-		}
-		return resultList;
+	private static void write(int num) {
+		new NumberWriter(){
+			@Override
+			public void write(int num) {
+				System.out.println(num);
+			}
+		}.write(num);
 	}
 
-	private static List<Integer> load(final String[] args) {
-		System.out.println("入力値");
-		List<Integer> list = new ArrayList<Integer>(args.length);
-		for(String arg: args){
-			System.out.println(arg);
-			list.add(NumberFormatChecker.toInteger(arg));
+	private static void execute(final String input) {
+		final long startTime = System.currentTimeMillis();
+		try{
+			//convert
+			System.out.println("入力値");
+			System.out.println(input);
+			int num = NumberFormatChecker.toInteger(input);
+
+			//count
+			PrimeCounter primeCounter = new PrimeCounterImpl();
+			int result = primeCounter.countPrimeNumber(num);
+
+			//output
+			System.out.println("出力値");
+			write(result);
+		}catch(NumberFormatException e){
+			//continue
+			e.printStackTrace();
 		}
-		return list;
+		final long endTime = System.currentTimeMillis();
+		System.out.println(endTime - startTime + "ms かかりました。");
 	}
 
 }
