@@ -9,12 +9,12 @@ public class PrimeCounterImpl implements PrimeCounter{
 	 */
 	@Override
 	public int countPrimeNumber(int inputNum) {
-		if(inputNum <= 2){
+		if(inputNum < 2){
 			return 0;
 		}
 
 		int count = 1; // 2は予めカウント
-		// 偶数は素数計算しない
+		// 2以外の偶数は素数でないので無視
 		for (int i = 3; i <= inputNum; i += 2) {
 			if (isPrime(i)) {
 				count++;
