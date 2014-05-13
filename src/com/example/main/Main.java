@@ -5,7 +5,7 @@ import java.io.InputStreamReader;
 
 import com.example.io.NumberWriter;
 import com.example.prime.PrimeCounter;
-import com.example.prime.PrimeCounterImpl;
+import com.example.prime.PrimeCounterImpl2;
 import com.example.util.NumberFormatChecker;
 
 public class Main {
@@ -44,7 +44,7 @@ public class Main {
 			int num = NumberFormatChecker.toInteger(input);
 
 			//count
-			PrimeCounter primeCounter = new PrimeCounterImpl();
+			PrimeCounter primeCounter = new PrimeCounterImpl2();
 			int result = primeCounter.countPrimeNumber(num);
 
 			//output
