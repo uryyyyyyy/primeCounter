@@ -10,14 +10,14 @@ public class PrimeCounterImpl2 implements PrimeCounter{
 	 */
 	@Override
 	public int countPrimeNumber(int inputNum) {
-		boolean[] primeList = new boolean[inputNum + 1];
+		boolean[] primeList = new boolean[inputNum];
 		int count = 0;
 		double checkNumberLimit = Math.sqrt(inputNum);
-		for (int num = 2; num <= inputNum; num++) {//1は素数でないので除外	
+		for (int num = 2; num <= inputNum-1; num++) {//1は素数でないので除外	
 			if (primeList[num] == false) {//未チェックのものがあれば、それは素数である。
 				count++;
 				if(num <= checkNumberLimit){
-					mark(inputNum, primeList, num);
+					mark(inputNum-1, primeList, num);
 				}
 			}
 		}
